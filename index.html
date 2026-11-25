@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>INCIPIT 建筑事务所 — 空间是关于人的注脚</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --paper:#F6F2EA;--paper-2:#EFEAE0;--ink:#16140F;--ink-2:#5A554B;--rule:#C9C2B4;--accent:#A63B2A;
+    --serif:"Songti SC","Times New Roman",Georgia,serif;
+    --sans:"Helvetica Neue","PingFang SC",Arial,sans-serif;
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:var(--serif);line-height:1.8;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  ul{list-style:none}
+  .wrap{max-width:1320px;margin:0 auto;padding:0 44px}
+
+  /* masthead */
+  .masthead{border-bottom:3px double var(--ink);padding-top:22px}
+  .mast-top{display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--sans);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-2);padding-bottom:12px;border-bottom:1px solid var(--rule)}
+  .mast-title{display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:18px 0 14px;flex-wrap:wrap}
+  .mast-title h1{font-size:clamp(38px,6.4vw,80px);letter-spacing:.16em;font-weight:400;line-height:1}
+  .mast-title .cn{font-size:13px;letter-spacing:.5em;color:var(--ink-2);font-family:var(--sans)}
+  .mast-title .issue{font-family:var(--sans);font-size:11px;letter-spacing:.2em;color:var(--ink-2);text-align:right;line-height:1.7}
+
+  nav.sub{border-bottom:1px solid var(--rule);position:sticky;top:0;background:rgba(246,242,234,.94);backdrop-filter:blur(6px);z-index:40}
+  nav.sub ul{display:flex;gap:34px;font-family:var(--sans);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2);height:50px;align-items:center;list-style:none;max-width:1320px;margin:0 auto;padding:0 44px}
+  nav.sub a:hover{color:var(--accent)}
+  nav.sub .spacer{margin-left:auto}
+
+  /* lead story */
+  .lead{padding:46px 0 0;display:grid;grid-template-columns:1.55fr 1fr;gap:0;border-bottom:1px solid var(--ink)}
+  .lead-main{padding-right:44px;border-right:1px solid var(--rule)}
+  .kicker{font-family:var(--sans);font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+  h2.headline{font-size:clamp(36px,4.6vw,62px);line-height:1.14;font-weight:400;letter-spacing:.01em;margin-bottom:22px}
+  .standfirst{font-size:17px;color:var(--ink-2);line-height:2;max-width:52ch;column-count:1}
+  .byline{font-family:var(--sans);font-size:11px;letter-spacing:.16em;color:var(--ink-2);margin-top:22px;padding-top:14px;border-top:1px solid var(--rule);display:flex;gap:22px;text-transform:uppercase}
+  .lead-figure{padding:0 0 0 44px}
+  .figure{
+    height:340px;background:linear-gradient(160deg,#DED7C9,#BFB6A4);position:relative;overflow:hidden;
+    display:flex;align-items:flex-end;justify-content:flex-end;padding:14px;
+  }
+  .figure::before{
+    content:"";position:absolute;inset:0;
+    background:
+      linear-gradient(115deg,transparent 46%,rgba(22,20,15,.13) 46%,rgba(22,20,15,.13) 47%,transparent 47%),
+      linear-gradient(65deg,transparent 58%,rgba(22,20,15,.09) 58%,rgba(22,20,15,.09) 59%,transparent 59%),
+      repeating-linear-gradient(0deg,rgba(22,20,15,.05) 0 1px,transparent 1px 34px);
+  }
+  .figure span{position:relative;font-family:var(--sans);font-size:10px;letter-spacing:.22em;color:#3A3529;text-transform:uppercase}
+  figcaption{font-family:var(--sans);font-size:11px;color:var(--ink-2);line-height:1.7;margin-top:10px}
+
+  /* section label */
+  .sec-label{display:flex;align-items:baseline;gap:16px;padding:34px 0 22px;border-bottom:1px solid var(--ink)}
+  .sec-label h3{font-size:13px;font-family:var(--sans);letter-spacing:.3em;text-transform:uppercase;font-weight:400}
+  .sec-label .num{font-family:var(--sans);font-size:10.5px;color:var(--accent);letter-spacing:.2em}
+  .sec-label .rule{flex:1;height:1px;background:var(--rule)}
+
+  /* three column editorial */
+  .multi{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--ink)}
+  .multi article{padding:34px 30px 40px;border-right:1px solid var(--rule)}
+  .multi article:first-child{padding-left:0}
+  .multi article:last-child{border-right:0;padding-right:0}
+  .multi h4{font-size:23px;font-weight:400;line-height:1.35;margin-bottom:6px}
+  .multi .cat{font-family:var(--sans);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+  .multi p{font-size:14.5px;color:var(--ink-2);line-height:1.95}
+  .multi p.drop::first-letter{
+    float:left;font-size:56px;line-height:.86;padding:6px 10px 0 0;color:var(--ink);
+  }
+
+  /* projects grid */
+  .projects{padding:0 0 20px;border-bottom:1px solid var(--ink)}
+  .prow{display:grid;grid-template-columns:64px 1.5fr 1fr 120px;gap:26px;align-items:center;padding:22px 0;border-bottom:1px solid var(--rule);font-family:var(--sans)}
+  .prow:last-child{border-bottom:0}
+  .prow .idx{font-size:11px;letter-spacing:.16em;color:var(--accent)}
+  .prow .nm{font-family:var(--serif);font-size:20px;letter-spacing:.01em}
+  .prow .nm small{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.14em;color:var(--ink-2);margin-top:4px;text-transform:uppercase}
+  .prow .ty{font-size:11.5px;letter-spacing:.14em;color:var(--ink-2);text-transform:uppercase}
+  .prow .yr{font-size:11.5px;letter-spacing:.1em;color:var(--ink-2);text-align:right}
+  .prow:hover .nm{color:var(--accent)}
+
+  /* feature spread */
+  .spread{display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid var(--ink)}
+  .spread .left{padding:50px 44px 50px 0;border-right:1px solid var(--rule)}
+  .spread .right{padding:50px 0 50px 44px}
+  .spread h3{font-size:clamp(26px,3vw,38px);font-weight:400;line-height:1.3;margin-bottom:20px}
+  .spread blockquote{font-size:19px;line-height:2;color:var(--ink);border-left:2px solid var(--accent);padding-left:26px;margin:26px 0;font-style:italic}
+  .spread p{font-size:14.5px;color:var(--ink-2);line-height:2}
+  .facts{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:34px;border-top:1px solid var(--rule)}
+  .facts div{padding:16px 0;border-bottom:1px solid var(--rule)}
+  .facts div:nth-child(odd){padding-right:20px}
+  .facts b{display:block;font-family:var(--serif);font-size:24px;font-weight:400}
+  .facts span{font-family:var(--sans);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
+
+  /* about */
+  .about{padding:54px 0 60px;display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:0;border-bottom:1px solid var(--ink)}
+  .about>div{padding:0 32px}
+  .about>div:first-child{padding-left:0;border-right:1px solid var(--rule);padding-right:32px}
+  .about>div:last-child{padding-right:0;border-left:1px solid var(--rule);padding-left:32px}
+  .about h3{font-size:26px;font-weight:400;line-height:1.4;margin-bottom:18px}
+  .about p{font-size:14px;color:var(--ink-2);line-height:1.95;margin-bottom:14px}
+  .about .list{font-family:var(--sans);font-size:12px;letter-spacing:.1em;color:var(--ink-2)}
+  .about .list li{padding:10px 0;border-bottom:1px dotted var(--rule)}
+  .about .list li b{display:block;color:var(--ink);font-size:13.5px;letter-spacing:.02em;font-family:var(--serif);margin-bottom:2px}
+
+  /* press / contact */
+  .bottom{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:0;padding:44px 0 0}
+  .bottom>div{padding:0 32px;border-right:1px solid var(--rule)}
+  .bottom>div:first-child{padding-left:0}
+  .bottom>div:last-child{border-right:0;padding-right:0}
+  .bottom h5{font-family:var(--sans);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+  .press li{padding:12px 0;border-bottom:1px dotted var(--rule);font-size:14px;color:var(--ink-2);display:flex;justify-content:space-between;gap:16px}
+  .press li b{color:var(--ink);font-weight:400}
+  .press li span{font-family:var(--sans);font-size:11px;letter-spacing:.1em;white-space:nowrap}
+  .contact p{font-family:var(--sans);font-size:12.5px;line-height:2;color:var(--ink-2);letter-spacing:.02em}
+  .contact .big{font-family:var(--serif);font-size:20px;color:var(--ink);margin-bottom:6px}
+
+  footer{margin-top:50px;border-top:3px double var(--ink);padding:24px 0 34px}
+  .fbot{display:flex;justify-content:space-between;align-items:center;font-family:var(--sans);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2);flex-wrap:wrap;gap:12px}
+  .fbot .mark{font-family:var(--serif);font-size:14px;letter-spacing:.36em;color:var(--ink)}
+
+  @media(max-width:1000px){
+    .wrap{padding:0 20px}
+    nav.sub ul{padding:0 20px;gap:20px;overflow-x:auto}
+    nav.sub .spacer{display:none}
+    .lead{grid-template-columns:1fr}
+    .lead-main{padding-right:0;border-right:0;border-bottom:1px solid var(--rule);padding-bottom:34px}
+    .lead-figure{padding:30px 0 34px}
+    .multi{grid-template-columns:1fr}
+    .multi article{border-right:0;border-bottom:1px solid var(--rule);padding:28px 0}
+    .prow{grid-template-columns:44px 1fr;gap:12px}
+    .prow .ty,.prow .yr{grid-column:2;text-align:left}
+    .spread{grid-template-columns:1fr}
+    .spread .left{border-right:0;padding:34px 0 20px;border-bottom:1px solid var(--rule)}
+    .spread .right{padding:26px 0 40px}
+    .about{grid-template-columns:1fr}
+    .about>div{padding:0 0 26px!important;border-right:0;border-left:0;border-bottom:1px solid var(--rule)}
+    .bottom{grid-template-columns:1fr}
+    .bottom>div{padding:0 0 26px;border-right:0;border-bottom:1px solid var(--rule)}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="mast-top">
+      <span>Architecture · Interiors · Urban Studies</span>
+      <span>Shanghai / Kyoto</span>
+      <span>Vol. XIV</span>
+    </div>
+    <div class="mast-title">
+      <div>
+        <h1>INCIPIT</h1>
+        <div class="cn" style="margin-top:10px">建筑事务所</div>
+      </div>
+      <div class="issue">第 14 期 · 2026<br>空间是关于人的注脚</div>
+    </div>
+  </div>
+</header>
+
+<nav class="sub">
+  <ul>
+    <li><a href="#practice">实践</a></li>
+    <li><a href="#projects">项目</a></li>
+    <li><a href="#about">关于</a></li>
+    <li><a href="#press">报道</a></li>
+    <li class="spacer"><a href="#contact">联系我们</a></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+  <section class="lead">
+    <div class="lead-main">
+      <div class="kicker">封面故事 / Cover Story</div>
+      <h2 class="headline">我们盖的不是房子，<br>是可以被反复使用的日常。</h2>
+      <p class="standfirst">在苏州河边的一栋旧纱厂里，INCIPIT 用三年时间完成了一次近乎固执的改造：保留全部混凝土柱网，拆掉所有后来添加的装饰，把 4,200 平方米交还给光线与人的走动。这不是一个关于风格的项目，而是一个关于"不做什么"的决定。</p>
+      <div class="byline"><span>文 / 编辑部</span><span>摄影 / 陈砚舟</span><span>2026.10</span></div>
+    </div>
+    <figure class="lead-figure">
+      <div class="figure"><span>Fig. 01 — 纱厂改造 / 中庭</span></div>
+      <figcaption>原有锯齿形天窗被完整保留，中庭成为整栋建筑的呼吸口。</figcaption>
+    </figure>
+  </section>
+
+  <div class="sec-label" id="practice">
+    <span class="num">01</span>
+    <h3>实践 / Practice</h3>
+    <span class="rule"></span>
+  </div>
+
+  <section class="multi">
+    <article>
+      <div class="cat">建筑</div>
+      <h4>从结构出发，而不是从立面出发</h4>
+      <p class="drop">我们习惯先看结构的可能性。一个项目最好的形式，往往已经在场地、跨度与材料里写好了，设计师只是把它辨认出来。过去十二年，INCIPIT 完成的 38 个项目中，有 27 个保留了原始结构框架。</p>
+    </article>
+    <article>
+      <div class="cat">室内</div>
+      <h4>让人愿意多坐十分钟</h4>
+      <p>室内不是建筑的内部，而是生活的容器。我们关心椅子的高度、窗台的可坐性、雨天进门的第一个动作。这些细节不会被拍进杂志，却决定了空间是否被真正使用。</p>
+    </article>
+    <article>
+      <div class="cat">研究</div>
+      <h4>城市是一份持续修订的稿子</h4>
+      <p>事务所下设城市研究小组，长期记录长三角工业遗存的再利用状况，已出版两本田野调查报告，并向三个地方政府提交过更新建议。</p>
+    </article>
+  </section>
+
+  <div class="sec-label" id="projects">
+    <span class="num">02</span>
+    <h3>项目 / Selected Projects</h3>
+    <span class="rule"></span>
+  </div>
+
+  <section class="projects">
+    <div class="prow"><span class="idx">01</span><div class="nm">苏州河纱厂改造<small>Suzhou Creek Mill Renovation</small></div><div class="ty">Adaptive Reuse / 4,200㎡</div><div class="yr">2026</div></div>
+    <div class="prow"><span class="idx">02</span><div class="nm">青龙山村民宿集群<small>Qinglong Mountain Retreats</small></div><div class="ty">Hospitality / 12 栋</div><div class="yr">2025</div></div>
+    <div class="prow"><span class="idx">03</span><div class="nm">京都町家住宅<small>Machiya House, Kyoto</small></div><div class="ty">Residential / 186㎡</div><div class="yr">2025</div></div>
+    <div class="prow"><span class="idx">04</span><div class="nm">杭州良渚社区图书馆<small>Liangzhu Community Library</small></div><div class="ty">Public / 2,800㎡</div><div class="yr">2024</div></div>
+    <div class="prow"><span class="idx">05</span><div class="nm">南京机床厂办公楼更新<small>Machine Tool Plant Offices</small></div><div class="ty">Workplace / 6,100㎡</div><div class="yr">2023</div></div>
+  </section>
+
+  <section class="spread" id="about">
+    <div class="left">
+      <div class="kicker">事务所 / The Practice</div>
+      <h3>十七个人，<br>一年做四个项目。</h3>
+      <p>INCIPIT 成立于 2014 年，由两位合伙人在上海创办。我们刻意保持团队规模——十七人，一年不超过四个同时进行的项目，确保每位主创都能在工地上待到最后一根线条收口。</p>
+      <p>事务所不设效果图部门。所有的呈现都基于剖面、模型与真实的材料样板，因为我们相信，业主需要看到的是可以建成的方案，而不是漂亮的图像。</p>
+      <blockquote>"建筑最终的评委不是评论家，是三年后还在这里生活的人。"</blockquote>
+      <p style="font-family:var(--sans);font-size:11.5px;letter-spacing:.14em;color:var(--ink-2)">— 合伙人 / 周砚、林一苇</p>
+    </div>
+    <div class="right">
+      <div class="kicker">数字 / In Figures</div>
+      <div class="facts">
+        <div><b>2014</b><span>成立年份</span></div>
+        <div><b>38</b><span>建成项目</span></div>
+        <div><b>17</b><span>团队人数</span></div>
+        <div><b>9</b><span>设计奖项</span></div>
+        <div><b>2</b><span>出版专著</span></div>
+        <div><b>3</b><span>高校客座</span></div>
+      </div>
+      <p style="margin-top:26px">获奖包括：WA 中国建筑奖入围（2025）、Architizer A+ Awards 专业评审奖（2024）、上海市优秀勘察设计二等奖（2023）、日本 JIA 新人奖提名（2022）。</p>
+      <p>作品与访谈见于《Domus》《建筑学报》《Wallpaper*》《IDEAT》等媒体。</p>
+    </div>
+  </section>
+
+  <section class="bottom" id="press">
+    <div>
+      <h5>近期报道 / Press</h5>
+      <ul class="press">
+        <li><b>《Domus》中文版专访：克制的力量</b><span>2026.09</span></li>
+        <li><b>《建筑学报》：工业遗存的日常化再利用</b><span>2026.06</span></li>
+        <li><b>一席演讲：我们为什么不画效果图</b><span>2025.11</span></li>
+        <li><b>《IDEAT》：十七人的事务所如何运转</b><span>2025.04</span></li>
+      </ul>
+    </div>
+    <div id="contact">
+      <h5>联系 / Contact</h5>
+      <div class="contact">
+        <div class="big">studio@incipit.cn</div>
+        <p>上海市杨浦区杨树浦路 1088 号<br>纱厂 B 座 3 层<br>+86 21 6563 2280</p>
+      </div>
+    </div>
+    <div>
+      <h5>合作 / Enquiries</h5>
+      <div class="contact">
+        <p>项目委托请附场地信息、面积与预算区间，我们通常在五个工作日内回复。<br><br>媒体与展览：press@incipit.cn<br>职位申请：join@incipit.cn</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap fbot">
+    <span class="mark">INCIPIT</span>
+    <span>© 2026 INCIPIT Architecture Studio · 沪ICP备 14028871 号</span>
+    <span>Shanghai · Kyoto</span>
+  </div>
+</footer>
+
+</body>
+</html>
